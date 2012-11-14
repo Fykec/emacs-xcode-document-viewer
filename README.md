@@ -13,11 +13,13 @@ Install
 
 ```bash
 $ cp emacs-xcode-document-viewer ~/.emacs.d
-$ (add-to-list 'load-path  "~/.emacs.d/emacs-xcode-document-viewer")
-$ (require 'xcode-document-viewer)
-$ (setq xcdoc:document-path "~/Library/Developer/Shared/Documentation/\
-   \DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset")
-$ (setq xcdoc:open-w3m-other-buffer t)
+```
+
+```lisp
+(add-to-list 'load-path  "~/.emacs.d/emacs-xcode-document-viewer")
+(require 'xcode-document-viewer)
+(setq xcdoc:document-path "~/Library/Developer/Shared/Documentation/DocSets/com.apple.adc.documentation.AppleiOS6.0.iOSLibrary.docset")
+(setq xcdoc:open-w3m-other-buffer t)
 ```
 
 Notice
