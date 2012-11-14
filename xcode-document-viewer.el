@@ -46,9 +46,7 @@
 (require 'thingatpt)
 (require 'anything)
 
-(defcustom xcdoc:document-path nil
-  "please set docset full path like:
-\"/Developer/Platforms/iPhoneOS.platform/Developer/Documentation/DocSets/com.apple.adc.documentation.AppleiPhone3_1.iPhoneLibrary.docset\"")
+(defcustom xcdoc:document-path nil "")
 
 (defcustom xcdoc:open-w3m-other-buffer nil
   "")
@@ -71,7 +69,7 @@
 
 (defun xcdoc:docsetutil-command ()
   (or (executable-find "docsetutil")
-      (and (file-executable-p "/Developer/usr/bin/docsetutil") "/Developer/usr/bin/docsetutil")
+      (and (file-executable-p "/Applications/Xcode.app/Contents/Developer/usr/bin/docsetutil") "/Application/Xcode.app/Contents/Developer/usr/bin/docsetutil")
       (error "docsetutil command is not found. Perhaps you dont have Xcode man.")))
 
 (defun* xcdoc:search-command (query docset)
@@ -80,9 +78,7 @@
           (shell-quote-argument query)
           docset))
 
-(defun* xcdoc:excecute-search (&key query docset (call-shell-command-fn 'shell-command-to-string))
-  "call shell command like:
-\"/Developer/usr/bin/docsetutil search -query  'View'  /Developer/Platforms/iPhoneOS.platform/Developer/Documentation/DocSets/com.apple.adc.documentation.AppleiPhone3_1.iPhoneLibrary.docset\""
+(defun* xcdoc:excecute-search (&key query docset (call-shell-command-fn 'shell-command-to-string)) ""
   (funcall call-shell-command-fn
            (xcdoc:search-command query docset)))
 
