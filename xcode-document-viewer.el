@@ -44,7 +44,7 @@
 
 (require 'w3m-load)
 (require 'thingatpt)
-(require 'anything)
+(require 'helm)
 
 (defcustom xcdoc:document-path nil "")
 
@@ -79,8 +79,8 @@
           docset))
 
 (defun* xcdoc:excecute-search (&key query docset (call-shell-command-fn 'shell-command-to-string)) ""
-  (funcall call-shell-command-fn
-           (xcdoc:search-command query docset)))
+        (funcall call-shell-command-fn
+                 (xcdoc:search-command query docset)))
 
 (defun* xcdoc:excecute-search-async (&key query docset)
   (start-process-shell-command (xcdoc:docsetutil-command)
@@ -132,7 +132,7 @@
     (candidates . (lambda ()
                     (xcdoc:build-candidates-from-command-res
                      (xcdoc:excecute-search
-                      :query anything-pattern
+                      :query helm-pattern
                       :docset (xcdoc:document-path)))))
     (volatile)
     (delayed)
@@ -141,7 +141,7 @@
                ("w3m new-session" . (lambda (c) (xcdoc:open-w3m c t)))))))
 
 (defun* xcdoc:search-at-point-source-candidates
-    (&optional (query (with-current-buffer anything-current-buffer
+    (&optional (query (with-current-buffer helm-current-buffer
                         (or (thing-at-point 'symbol) ""))))
   (xcdoc:build-candidates-from-command-res
    (xcdoc:excecute-search
@@ -156,18 +156,18 @@
 
 (defun xcdoc:search ()
   (interactive)
-  (anything (list (xcdoc:search-source))))
+  (helm (list (xcdoc:search-source))))
 
 (defun xcdoc:ask-search ()
   (interactive)
   (lexical-let* ((query (read-string "Query: " (or (thing-at-point 'symbol) ""))))
-    (let ((anything-quit-if-no-candidate (lambda () (message "no document for %s" query))))
-    (anything (list (xcdoc:search-at-point-source query))))))
+    (let ((helm-quit-if-no-candidate (lambda () (message "no document for %s" query))))
+      (helm (list (xcdoc:search-at-point-source query))))))
 
 (defun xcdoc:search-at-point ()
   (interactive)
-  (let ((anything-quit-if-no-candidate (lambda () (message "no document for %s" (or (thing-at-point 'symbol) "")))))
-    (anything (list (xcdoc:search-at-point-source)))))
+  (let ((helm-quit-if-no-candidate (lambda () (message "no document for %s" (or (thing-at-point 'symbol) "")))))
+    (helm (list (xcdoc:search-at-point-source)))))
 
 (provide 'xcode-document-viewer)
 ;; xcode-document-viewer.el ends here.
