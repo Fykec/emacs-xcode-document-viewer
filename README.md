@@ -1,15 +1,15 @@
 Scan Apple docset in Emacs
 ======
 
-##Install Steps
+## Install Steps
 
-Clone
+#### Clone
 
 ```bash
 $ git clone https://github.com/Fykec/emacs-xcode-document-viewer.git
 ```
 
-Install
+#### Install
 
 ```bash
 $ cp emacs-xcode-document-viewer ~/.emacs.d
@@ -22,6 +22,7 @@ $ cp emacs-xcode-document-viewer ~/.emacs.d
 (setq xcdoc:open-w3m-other-buffer t)
 ```
 
-Notice
+#### Notice
 
-This sript depend on w3m (http://emacs-w3m.namazu.org/)
+* This sript depend on [w3m](http://emacs-w3m.namazu.org/)
+* Also now depend on [Emacs Helm plugin](https://github.com/emacs-helm/helm/wiki).
